@@ -28,7 +28,7 @@ public class UserContentResponse  {
         ContentList = contentList;
     }
 
-    private class Contents {
+    public class Contents {
         @SerializedName("title")
         private String title ;
 
