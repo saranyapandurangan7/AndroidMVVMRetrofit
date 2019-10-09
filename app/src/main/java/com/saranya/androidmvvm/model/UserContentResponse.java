@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+@SuppressWarnings("ALL")
 public class UserContentResponse  {
 
     @SerializedName("title")

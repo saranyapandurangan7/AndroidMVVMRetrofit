@@ -1,27 +1,17 @@
 package com.saranya.androidmvvm.dimodule;
 
-import android.app.Application;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.google.gson.FieldNamingPolicy;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.saranya.androidmvvm.api.ApiComponent;
-import com.saranya.androidmvvm.api.DaggerApiComponent;
 import com.saranya.androidmvvm.model.UserContentResponse;
 import com.saranya.androidmvvm.rx.RXClient;
 
 import javax.inject.Inject;
-import javax.inject.Singleton;
 
 import dagger.Module;
-import dagger.Provides;
-import okhttp3.Cache;
-import okhttp3.OkHttpClient;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;

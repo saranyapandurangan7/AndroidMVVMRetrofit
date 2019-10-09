@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="commonPadding">15dp</dimen>
-    <dimen name="margin">5dp</dimen>
 </resources>

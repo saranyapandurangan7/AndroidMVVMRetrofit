@@ -13,7 +13,7 @@ import rx.Observable;
 
 public class RXClient  {
 
-    private UserContentService service;
+    private final UserContentService service;
 
     @Inject
     public RXClient(String url) {

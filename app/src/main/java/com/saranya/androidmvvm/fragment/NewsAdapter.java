@@ -18,9 +18,8 @@ import com.saranya.androidmvvm.model.UserContentResponse;
 import java.util.List;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
-    private List<UserContentResponse.Contents> news;
-    private LayoutInflater mInflater;
-    Context context;
+    private final List<UserContentResponse.Contents> news;
+    private final Context context;
 
 
     @NonNull
@@ -58,11 +57,11 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         return news.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView headlines;
-        ImageView imageView;
-        TextView description;
-        public ViewHolder(View v) {
+    class ViewHolder extends RecyclerView.ViewHolder{
+        final TextView headlines;
+        final ImageView imageView;
+        final TextView description;
+        private ViewHolder(View v) {
             super(v);
             headlines = (itemView.findViewById(R.id.headline));
             description = (itemView.findViewById(R.id.description));
