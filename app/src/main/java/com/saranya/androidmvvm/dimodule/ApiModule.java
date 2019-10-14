@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.saranya.androidmvvm.api.ApiComponent;
+import com.saranya.androidmvvm.api.DaggerApiComponent;
 import com.saranya.androidmvvm.model.UserContentResponse;
 import com.saranya.androidmvvm.rx.RXClient;
 

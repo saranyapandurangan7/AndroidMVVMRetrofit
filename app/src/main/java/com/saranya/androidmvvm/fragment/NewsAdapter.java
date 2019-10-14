@@ -37,7 +37,9 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull NewsAdapter.ViewHolder holder, int position) {
         final UserContentResponse.Contents model = news.get(position);
-
+        if(model.getDescription()== null && model.getImageHref()== null && model.getTitle()== null){
+            news.remove(model);
+        }
         holder.headlines.setText(news.get(position).getTitle());
         holder.description.setText(news.get(position).getDescription());
         Glide.with(context)

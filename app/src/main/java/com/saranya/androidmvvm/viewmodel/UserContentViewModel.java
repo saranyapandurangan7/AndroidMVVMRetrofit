@@ -17,7 +17,7 @@ public class UserContentViewModel  extends ViewModel {
     private LiveData<UserContentResponse> mUserContentResponseModel;
 
     @Inject
-    private ApiModule repository;
+    ApiModule repository;
 
     public void init() {
         if (this.mUserContentResponseModel != null && mUserContentResponseModel.getValue() != null) {
