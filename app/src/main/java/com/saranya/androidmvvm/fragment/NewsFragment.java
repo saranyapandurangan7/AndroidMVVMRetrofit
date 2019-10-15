@@ -1,5 +1,6 @@
 package com.saranya.androidmvvm.fragment;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -43,7 +45,19 @@ public class NewsFragment extends Fragment implements NewsFragmentView {
         mSwipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
         mProgressbar = view.findViewById(R.id.spinner);
         mNewsAdapter = new NewsAdapter(list , this.getContext());
+        mRecyclerView.setAdapter(mNewsAdapter);
+        int currentOrientation = getResources().getConfiguration().orientation;
+        if (currentOrientation == Configuration.ORIENTATION_LANDSCAPE) {
+            // Landscape
+            GridLayoutManager manager = new GridLayoutManager(this.getContext(),2);
+            mRecyclerView.setLayoutManager(manager);
+        }
+        else {
+            // Portrait
+            LinearLayoutManager manager = new LinearLayoutManager(this.getContext());
+            mRecyclerView.setLayoutManager(manager);
 
+        }
         mUserContentViewModel = ViewModelProviders.of(this).get(UserContentViewModel.class);
         ApiComponent appComponent = DaggerApiComponent
                 .builder()
@@ -78,8 +92,6 @@ public class NewsFragment extends Fragment implements NewsFragmentView {
                 mUserContentResponseModel = mUserContentViewModel.getCountryModelLiveData().getValue();
                 if(mUserContentResponseModel != null) {
                     bindListData(mUserContentResponseModel.getContentList());
-                    list.addAll(mUserContentResponseModel.getContentList());
-                    bindListData(list);
                 }
             }
         });
@@ -103,14 +115,24 @@ public class NewsFragment extends Fragment implements NewsFragmentView {
         if (mSwipeRefreshLayout.isRefreshing()) {
             mSwipeRefreshLayout.setRefreshing(false);
         }
-        LinearLayoutManager manager = new LinearLayoutManager(this.getContext());
-        mRecyclerView.setAdapter(mNewsAdapter);
-        mRecyclerView.setLayoutManager(manager);
+        if (!list.isEmpty()){
+            list.clear();
+        }
+        List<UserContentResponse.Contents> userslist1List = new ArrayList<>(contents);
+        for (UserContentResponse.Contents number : userslist1List) {
+            if( number.getTitle()==null && number.getDescription()==null && number.getImageHref()==null ){
+                contents.remove(number);
+            }
+            list.add(number);
+    }
+
         if (getActivity() !=null)
-        mNewsAdapter = new NewsAdapter(contents, getActivity().getApplicationContext());
+        mNewsAdapter = new NewsAdapter(list, getActivity().getApplicationContext());
         mNewsAdapter.notifyDataSetChanged();
         hideProgressIndication();
         // Stopping swipe refresh
         mSwipeRefreshLayout.setRefreshing(false);
     }
+
+
 }
