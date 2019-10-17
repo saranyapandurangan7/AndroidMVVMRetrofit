@@ -1,5 +1,6 @@
 package com.saranya.androidmvvm.fragment;
 
+import com.saranya.androidmvvm.db.Contents;
 import com.saranya.androidmvvm.model.UserContentResponse;
 
 import java.util.List;
@@ -10,5 +11,9 @@ interface NewsFragmentView {
 
     void hideProgressIndication();
 
-    void bindListData(List<UserContentResponse.Contents> contents);
+    void bindListData(List<Contents> tasks);
+
+    void showErrorMessage();
+
+    void hideErrorMessage();
 }
